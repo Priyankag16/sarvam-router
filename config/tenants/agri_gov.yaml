@@ -1,0 +1,19 @@
+tenant: agri_gov_farmers
+segment: Government application for farmers
+# Air-gapped state data centre: only self-hostable open-weight models allowed.
+allowed_models: [glm-5.3-flash, sarvam-105b-conversations, sarvam-105b, glm-5.3]
+deployment: air_gapped
+live_voice_p95_ms: 2000       # feature-phone IVR tolerates more latency
+quality_floor: 4.0
+never_route_down: [eligibility]
+
+# R6 human review: defaults HR1-HR4 from config/review_defaults.yaml, plus
+# HR5: decisions that affect a citizen's entitlement. Matched on the citizen's
+# QUESTION only.
+human_review:
+  rules:
+    HR2_product_recommendation:
+      enabled: false          # a government scheme helpline does not recommend products
+    HR5_sensitive_topic:
+      enabled: true
+      question_patterns: ['reject', 'eligib', '\bclaim', 'पात्र', 'अस्वीकृत', 'ਯੋਗ', 'ਰੱਦ', 'தகுதி', 'అర్హత']

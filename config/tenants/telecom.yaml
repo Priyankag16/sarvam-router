@@ -1,0 +1,16 @@
+tenant: telecom_support
+segment: Telecom support
+allowed_models: [glm-5.3-flash, sarvam-105b-conversations, sarvam-105b, glm-5.3]
+deployment: sarvam_cloud
+live_voice_p95_ms: 1200
+quality_floor: 3.8
+never_route_down: [compliance]
+
+# R6 human review: defaults HR1-HR4 from config/review_defaults.yaml, plus
+# HR5: TRAI consumer-protection topics a human must own. Matched on the
+# customer's QUESTION only (never on transcripts or label lists).
+human_review:
+  rules:
+    HR5_sensitive_topic:
+      enabled: true
+      question_patterns: ['port ?out', 'porting', 'disconnect', 'refund', '\btrai\b', 'appellate']

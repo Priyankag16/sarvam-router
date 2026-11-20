@@ -1,0 +1,19 @@
+# Tenant settings: the trade-offs this customer has signed off on.
+tenant: bfsi_callcentre
+segment: BFSI call centre
+allowed_models: [glm-5.3-flash, sarvam-105b-conversations, sarvam-105b, glm-5.3]
+deployment: customer_vpc
+live_voice_p95_ms: 1500
+quality_floor: 4.0            # contract: routed quality on the protected slice >= this
+never_route_down: [compliance, dispute, loan_decision]   # task tags that always get the hard path
+
+# R6 human review: answer-based rules HR1-HR4 from config/review_defaults.yaml.
+# Fine-tune here: switch a rule off, or replace its patterns. Examples:
+#   rules:
+#     HR2_product_recommendation: {enabled: false}
+#     HR3_complaint_reply:
+#       question_patterns: ['delay', 'late', 'chargeback', 'fraud', 'ombudsman']
+human_review:
+  rules:
+    HR5_sensitive_topic:
+      enabled: false          # BFSI: the HR1-HR4 rules cover what this bank's reviewers asked for

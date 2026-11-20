@@ -1,0 +1,92 @@
+# Model catalogue: the four endpoints the router chooses between.
+#
+# All four run on the Sarvam Inference Platform, behind one endpoint and one
+# API key. The GLM models are open-weight models Sarvam hosts itself
+# ("Token Factory"), so the same setup can run in Sarvam's cloud, inside a
+# customer's VPC, or on an air-gapped server.
+#
+# Prices are Sarvam's list prices in INR per 1M tokens, excluding GST, from
+# https://docs.sarvam.ai/api/getting-started/pricing (checked 2026-11-18).
+#   - Reasoning tokens are billed as output tokens.
+#   - sarvam-105b and sarvam-105b-conversations are on intro pricing until
+#     the end of 2026; report.py also shows costs after that ends.
+# Cached-input prices are listed but not used (no prompt caching assumed).
+price_date: "2026-11-18"
+currency: INR
+fx_inr_per_usd: 88.0          # only used to show USD alongside INR
+
+models:
+  sarvam-105b:
+    api_model: sarvam-105b
+    in_inr_per_m: 10.0
+    cached_in_inr_per_m: 0.25
+    out_inr_per_m: 25.0
+    timeout_s: 20
+    intro_pricing: true
+  sarvam-105b-conversations:
+    api_model: sarvam-105b-conversations
+    in_inr_per_m: 10.0
+    cached_in_inr_per_m: 0.25
+    out_inr_per_m: 25.0
+    timeout_s: 4               # live voice: tight budget
+    intro_pricing: true
+  glm-5.3-flash:
+    api_model: glm5.3-flash    # Sarvam's model id (no hyphen after "glm")
+    in_inr_per_m: 13.5
+    cached_in_inr_per_m: 2.5
+    out_inr_per_m: 45.0
+    timeout_s: 10
+  glm-5.3:
+    api_model: glm5.3
+    in_inr_per_m: 126.0
+    cached_in_inr_per_m: 20.0
+    out_inr_per_m: 390.0
+    timeout_s: 30
+
+# Guess at the Sarvam price after the intro offer (only used for the what-if).
+# Not published yet; assumed to match GLM-5.3 Flash.
+post_intro_sarvam_price: {in_inr_per_m: 13.5, out_inr_per_m: 45.0}
+
+# The fallback order for each rule is set in router/rules.py.
+# This is how many times a request can move up before we give up.
+max_escalations: 2
+
+# Rough hidden reasoning tokens per call, by model and effort. Only used in
+# mock mode; real runs read the actual numbers from the API response.
+reasoning_tokens:
+  glm-5.3-flash: {low: 0, default: 60, high: 200}
+  sarvam-105b-conversations: {low: 0, default: 0, high: 0}
+  sarvam-105b: {low: 40, default: 150, high: 600}
+  glm-5.3: {low: 100, default: 500, high: 1200}
+
+# One chat-completions endpoint and one key for every model.
+# /v2 serves both Sarvam's models and the GLM ones; /v1 only takes the two
+# Sarvam models (checked 2026-11-18).
+# Set SARVAM_BASE_URL in .env to point at a VPC / air-gapped deployment instead.
+endpoint:
+  url: "https://api.sarvam.ai/v2/chat/completions"
+  max_tokens: 4000          # reasoning tokens count against this; GLM default is only 2048
+  url_env: SARVAM_BASE_URL
+  key_env: SARVAM_API_KEY
+  auth_header: "api-subscription-key"
+
+baselines:
+  # Cheapest per request in the live run (2026-11-18), because it uses no
+  # hidden reasoning tokens. sarvam-105b has the same list price but cost
+  # about 7x more per request.
+  always_cheapest: sarvam-105b-conversations
+  always_frontier: glm-5.3
+
+# Speech-to-text (Saaras), used by run_audio.py for MP4 / audio files.
+# From the docs (2026-11-18): POST /speech-to-text, multipart upload, max 30 s
+# of audio per request, takes MP4/M4A/WAV/MP3/AAC/OGG, ₹0.49 per minute.
+stt:
+  url: "https://api.sarvam.ai/speech-to-text"
+  model: "saaras:v4"
+  mode: "codemix"              # Hindi/Punjabi in native script, English words in English
+  max_chunk_s: 29              # stay under the 30-second synchronous limit
+  timeout_s: 30
+  price_inr_per_min: 0.49
+  # Below these, the bot asks the caller to confirm instead of acting:
+  min_words: 3
+  min_language_probability: 0.6

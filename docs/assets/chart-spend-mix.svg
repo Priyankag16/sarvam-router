@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="346" viewBox="0 0 720 346" role="img" aria-labelledby="t d" class="viz">
+<title id="t">Router traffic and spend by model</title><desc id="d">Share of requests and share of spend per model.</desc>
+<style>
+  .viz { --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#8a8984; --grid:#e6e5e1;
+         --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; }
+  @media (prefers-color-scheme: dark) {
+    .viz { --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#8f8e86; --grid:#33332f;
+           --s1:#3987e5; --s2:#d95926; --s3:#199e70; } }
+  text { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .t { font-size:15px; font-weight:600; } .st { font-size:12px; fill: var(--ink2); }
+  .ax { font-size:11px; fill: var(--ink2); } .lab { font-size:11px; fill: var(--ink); }
+  .note { font-size:10.5px; fill: var(--muted); }
+  .grid { stroke: var(--grid); stroke-width:1; } .base { stroke: var(--muted); stroke-width:1; }
+  .s1 { fill: var(--s1); } .s2 { fill: var(--s2); } .s3 { fill: var(--s3); } .sn { fill: var(--ink2); }
+  .ring { stroke: var(--surface); stroke-width:2; }
+</style>
+<rect width="720" height="346" rx="8" style="fill:var(--surface)"/>
+<text x="24" y="30" class="t">Where the router sends traffic, and where the money goes</text>
+<text x="24" y="50" class="st">75 live prompts. GLM-5.3 answers few requests but takes most of the spend.</text>
+<rect x="24" y="63" width="10" height="10" rx="2" class="sn"/><text x="39" y="72" class="ax">Share of router requests</text><rect x="197.2" y="63" width="10" height="10" rx="2" class="s1"/><text x="212.2" y="72" class="ax">Share of router spend</text>
+<line x1="170.0" y1="82" x2="170.0" y2="312" class="grid"/><text x="170.0" y="326" text-anchor="middle" class="ax">0%</text>
+<line x1="292.5" y1="82" x2="292.5" y2="312" class="grid"/><text x="292.5" y="326" text-anchor="middle" class="ax">25%</text>
+<line x1="415.0" y1="82" x2="415.0" y2="312" class="grid"/><text x="415.0" y="326" text-anchor="middle" class="ax">50%</text>
+<line x1="537.5" y1="82" x2="537.5" y2="312" class="grid"/><text x="537.5" y="326" text-anchor="middle" class="ax">75%</text>
+<line x1="660.0" y1="82" x2="660.0" y2="312" class="grid"/><text x="660.0" y="326" text-anchor="middle" class="ax">100%</text>
+<text x="160" y="104" text-anchor="end" class="lab">conversations</text>
+<path class="sn" d="M170.0,89.0 H518.8 Q522.8,89.0 522.8,93.0 V98.0 Q522.8,102.0 518.8,102.0 H170.0 Z"/>
+<text x="527.8" y="99.5" class="note">72%</text>
+<path class="s1" d="M170.0,104.0 H185.7 Q189.7,104.0 189.7,108.0 V113.0 Q189.7,117.0 185.7,117.0 H170.0 Z"/>
+<text x="194.7" y="114.5" class="note">4%</text>
+<text x="160" y="148" text-anchor="end" class="lab">sarvam-105b</text>
+<path class="sn" d="M170.0,133.0 H218.3 Q222.3,133.0 222.3,137.0 V142.0 Q222.3,146.0 218.3,146.0 H170.0 Z"/>
+<text x="227.3" y="143.5" class="note">11%</text>
+<path class="s1" d="M170.0,148.0 H207.1 Q211.1,148.0 211.1,152.0 V157.0 Q211.1,161.0 207.1,161.0 H170.0 Z"/>
+<text x="216.1" y="158.5" class="note">8%</text>
+<text x="160" y="192" text-anchor="end" class="lab">glm-5.3</text>
+<path class="sn" d="M170.0,177.0 H224.8 Q228.8,177.0 228.8,181.0 V186.0 Q228.8,190.0 224.8,190.0 H170.0 Z"/>
+<text x="233.8" y="187.5" class="note">12%</text>
+<path class="s1" d="M170.0,192.0 H581.5 Q585.5,192.0 585.5,196.0 V201.0 Q585.5,205.0 581.5,205.0 H170.0 Z"/>
+<text x="590.5" y="202.5" class="note">85%</text>
+<text x="160" y="236" text-anchor="end" class="lab">glm-5.3-flash</text>
+<path class="sn" d="M170.0,221.0 H179.1 Q183.1,221.0 183.1,225.0 V230.0 Q183.1,234.0 179.1,234.0 H170.0 Z"/>
+<text x="188.1" y="231.5" class="note">3%</text>
+<path class="s1" d="M170.0,236.0 H179.6 Q183.6,236.0 183.6,240.0 V245.0 Q183.6,249.0 179.6,249.0 H170.0 Z"/>
+<text x="188.6" y="246.5" class="note">3%</text>
+<text x="160" y="280" text-anchor="end" class="lab">rule reply, no model</text>
+<path class="sn" d="M170.0,265.0 H179.1 Q183.1,265.0 183.1,269.0 V274.0 Q183.1,278.0 179.1,278.0 H170.0 Z"/>
+<text x="188.1" y="275.5" class="note">3%</text>
+
+<text x="175.0" y="290.5" class="note">0%</text>
+<line x1="170" y1="82" x2="170" y2="312" class="base"/>
+</svg>

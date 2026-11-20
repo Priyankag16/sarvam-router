@@ -1,0 +1,105 @@
+# R6 human review: the default rules, used for every customer.
+#
+# Review is decided by what the answer does, after it's written, not by
+# keywords in the prompt. (The keyword version caught 0 of the 10 cases that
+# needed review on the 75-prompt tuning set and raised 9 false flags.)
+#
+# Each customer file (config/tenants/*.yaml) can adjust these in its own
+# `human_review:` block: turn a rule off (enabled: false) or replace any
+# pattern list. Anything it doesn't mention comes from here.
+#
+# Patterns are regular expressions, case-insensitive.
+#   question_patterns -> checked against the customer's question / instruction
+#                        only (for a transcript, just its first and last line,
+#                        so words inside the transcript don't trigger a flag)
+#   product_patterns  -> also checked against the question (used by HR2)
+#   answer_patterns   -> checked against the model's answer
+#   applies_to: reply -> only when the task is writing a reply to a customer
+#                        (see reply_task_patterns)
+# A rule fires only when every pattern list it has finds a match.
+#
+# Never flagged, whatever the rules say: labels / extraction (R4), canned
+# replies and refusals (R1), and the speech-to-text confirmation (R0).
+# For now every flag goes to the review queue, live calls included.
+
+# Rules are checked in this order and the first one that fires is the reason
+# the reviewer sees. Most serious first: a compliance failure beats a
+# complaint reply, which beats a date promised in that reply.
+check_order: [HR4_compliance_finding, HR3_complaint_reply, HR1_timeline_commitment,
+              HR2_product_recommendation, HR5_sensitive_topic]
+
+reply_task_patterns:                 # "write a reply to a customer", not "answer this"
+  - 'reply'
+  - 'draft'
+  - 'जवाब लिख'
+  - 'ਜਵਾਬ ਲਿਖ'
+
+rules:
+  HR1_timeline_commitment:
+    description: "A reply commits the bank to a date or a time period"
+    enabled: true
+    applies_to: reply
+    answer_patterns:                  # dates ("5 Nov") and periods ("7 days", "48 ghante")
+      - '\b\d{1,2}\s*(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b'
+      - '\b\d+\s*(days?|din|hours?|ghante|weeks?)\b'
+      - '\d+\s*(दिन|घंटे|हफ्ते|ਦਿਨ|ਘੰਟੇ|ਹਫ਼ਤੇ)'
+      - '(जनवरी|फरवरी|मार्च|अप्रैल|मई|जून|जुलाई|अगस्त|सितंबर|अक्टूबर|नवंबर|दिसंबर)'
+      - '(ਜਨਵਰੀ|ਫ਼ਰਵਰੀ|ਮਾਰਚ|ਅਪ੍ਰੈਲ|ਮਈ|ਜੂਨ|ਜੁਲਾਈ|ਅਗਸਤ|ਸਤੰਬਰ|ਅਕਤੂਬਰ|ਨਵੰਬਰ|ਦਸੰਬਰ)'
+      - '(एक|दो|तीन|चार|पांच|पाँच|सात|ਇੱਕ|ਦੋ|ਤਿੰਨ|ਸੱਤ)\s*(दिन|ਦਿਨ)'
+
+  HR2_product_recommendation:
+    description: "The customer asks which product to choose and the answer picks one"
+    enabled: true
+    question_patterns:                # a choice question ...
+      - '\bbetter\b'
+      - 'behtar'
+      - 'kaun ?sa'
+      - 'which (one|card|loan|plan|account) should'
+      - 'should i (take|choose|get|open)'
+      - 'recommend'
+      - 'कौन सा बेहतर'
+      - 'ਕਿਹੜਾ ਵਧੀਆ'
+    product_patterns:                 # ... about a financial product
+      - '\bcard\b'
+      - '\bloan\b'
+      - '\bfd\b'
+      - '\bplan\b'
+      - 'policy'
+      - 'कार्ड'
+      - 'लोन'
+      - 'ਕਾਰਡ'
+      - 'ਲੋਨ'
+
+  HR3_complaint_reply:
+    description: "A reply to a customer who reports a problem with the bank"
+    enabled: true
+    applies_to: reply_or_voice
+    question_patterns:                # signs the customer is reporting a problem
+      - 'delay'
+      - '\blate\b'
+      - 'देर'
+      - 'ਦੇਰ'
+      - 'kat gaye'
+      - 'debited'
+      - 'blocked'
+      - 'third time'
+      - 'useless'
+      - 'refund'
+      - 'not received'
+      - 'नहीं मिल'
+      - 'ਨਹੀਂ ਮਿਲ'
+      - 'wrong'
+      - 'galat'
+      - 'ਗਲਤ'
+
+  HR4_compliance_finding:
+    description: "A compliance check finds a failure"
+    enabled: true
+    applies_to_rule: R3c-compliance   # only answers to compliance checks
+    answer_patterns:                  # the check came back as a fail
+      - 'disclosure_read\W*no\b'
+
+  HR5_sensitive_topic:
+    description: "The question is about a topic this customer always wants a human to own"
+    enabled: false                    # off by default; customers switch it on with their own topics
+    question_patterns: []

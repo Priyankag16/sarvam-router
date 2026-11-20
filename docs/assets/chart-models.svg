@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="260" viewBox="0 0 720 260" role="img" aria-labelledby="t d" class="viz">
+<title id="t">Single-model comparison</title><desc id="d">GLM-5.3: 32 passed, ₹9.55; Sarvam-105B: 29 passed, ₹1.04; GLM-5.3 Flash: 29 passed, ₹0.45; 105b-conversations: 29 passed, ₹0.15</desc>
+<style>
+  .viz { --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#8a8984; --grid:#e6e5e1;
+         --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; }
+  @media (prefers-color-scheme: dark) {
+    .viz { --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#8f8e86; --grid:#33332f;
+           --s1:#3987e5; --s2:#d95926; --s3:#199e70; } }
+  text { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .t { font-size:15px; font-weight:600; } .st { font-size:12px; fill: var(--ink2); }
+  .ax { font-size:11px; fill: var(--ink2); } .lab { font-size:11px; fill: var(--ink); }
+  .note { font-size:10.5px; fill: var(--muted); }
+  .grid { stroke: var(--grid); stroke-width:1; } .base { stroke: var(--muted); stroke-width:1; }
+  .s1 { fill: var(--s1); } .s2 { fill: var(--s2); } .s3 { fill: var(--s3); } .sn { fill: var(--ink2); }
+  .ring { stroke: var(--surface); stroke-width:2; }
+</style>
+<rect width="720" height="260" rx="8" style="fill:var(--surface)"/>
+<text x="24" y="30" class="t">Each model alone, same 36 prompts</text>
+<text x="24" y="50" class="st">Left: prompts passed (of 36). Right: total cost for the 36 prompts (₹).</text>
+<text x="150" y="68" class="ax" font-weight="600">Passed (of 36)</text>
+<text x="510" y="68" class="ax" font-weight="600">Cost for 36 prompts</text>
+<text x="140" y="92.0" text-anchor="end" class="lab">GLM-5.3</text>
+<path class="sn" d="M150.0,76.0 H341.6 Q345.6,76.0 345.6,80.0 V96.0 Q345.6,100.0 341.6,100.0 H150.0 Z"/>
+<text x="351.6" y="92.0" class="lab">32</text>
+<path class="sn" d="M510.0,76.0 H639.7 Q643.7,76.0 643.7,80.0 V96.0 Q643.7,100.0 639.7,100.0 H510.0 Z"/>
+<text x="649.7" y="92.0" class="lab">₹9.55</text>
+<text x="140" y="128.0" text-anchor="end" class="lab">Sarvam-105B</text>
+<path class="sn" d="M150.0,112.0 H323.2 Q327.2,112.0 327.2,116.0 V132.0 Q327.2,136.0 323.2,136.0 H150.0 Z"/>
+<text x="333.2" y="128.0" class="lab">29</text>
+<path class="sn" d="M510.0,112.0 H520.5 Q524.5,112.0 524.5,116.0 V132.0 Q524.5,136.0 520.5,136.0 H510.0 Z"/>
+<text x="530.5" y="128.0" class="lab">₹1.04</text>
+<text x="140" y="164.0" text-anchor="end" class="lab">GLM-5.3 Flash</text>
+<path class="sn" d="M150.0,148.0 H323.2 Q327.2,148.0 327.2,152.0 V168.0 Q327.2,172.0 323.2,172.0 H150.0 Z"/>
+<text x="333.2" y="164.0" class="lab">29</text>
+<path class="sn" d="M510.0,148.0 H512.3 Q516.3,148.0 516.3,152.0 V168.0 Q516.3,172.0 512.3,172.0 H510.0 Z"/>
+<text x="522.3" y="164.0" class="lab">₹0.45</text>
+<text x="140" y="200.0" text-anchor="end" class="lab">105b-conversations</text>
+<path class="sn" d="M150.0,184.0 H323.2 Q327.2,184.0 327.2,188.0 V204.0 Q327.2,208.0 323.2,208.0 H150.0 Z"/>
+<text x="333.2" y="200.0" class="lab">29</text>
+<path class="sn" d="M510.0,184.0 H510.0 Q512.2,184.0 512.2,186.2 V205.8 Q512.2,208.0 510.0,208.0 H510.0 Z"/>
+<text x="518.2" y="200.0" class="lab">₹0.15</text>
+<line x1="150" y1="74" x2="150" y2="224" class="base"/><line x1="510" y1="74" x2="510" y2="224" class="base"/>
+<text x="24" y="246" class="note">Every model at default effort, 60 s timeout, live Sarvam API. Scored against the author's rubrics.</text>
+</svg>

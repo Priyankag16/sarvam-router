@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="540" viewBox="0 0 720 540" role="img" aria-labelledby="t d" class="viz">
+<title id="t">Pass rate by task type</title><desc id="d">Grouped bars: pass rate for each task type for the router and both baselines.</desc>
+<style>
+  .viz { --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#8a8984; --grid:#e6e5e1;
+         --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; }
+  @media (prefers-color-scheme: dark) {
+    .viz { --surface:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --muted:#8f8e86; --grid:#33332f;
+           --s1:#3987e5; --s2:#d95926; --s3:#199e70; } }
+  text { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .t { font-size:15px; font-weight:600; } .st { font-size:12px; fill: var(--ink2); }
+  .ax { font-size:11px; fill: var(--ink2); } .lab { font-size:11px; fill: var(--ink); }
+  .note { font-size:10.5px; fill: var(--muted); }
+  .grid { stroke: var(--grid); stroke-width:1; } .base { stroke: var(--muted); stroke-width:1; }
+  .s1 { fill: var(--s1); } .s2 { fill: var(--s2); } .s3 { fill: var(--s3); } .sn { fill: var(--ink2); }
+  .ring { stroke: var(--surface); stroke-width:2; }
+</style>
+<rect width="720" height="540" rx="8" style="fill:var(--surface)"/>
+<text x="24" y="30" class="t">Pass rate by task type</text>
+<text x="24" y="50" class="st">75 live prompts, scored against the author's rubrics. Share of prompts at or above the pass mark.</text>
+<rect x="24" y="63" width="10" height="10" rx="2" class="s1"/><text x="39" y="72" class="ax">Router</text><rect x="83.8" y="63" width="10" height="10" rx="2" class="s2"/><text x="98.8" y="72" class="ax">Always-frontier (GLM-5.3)</text><rect x="263.3" y="63" width="10" height="10" rx="2" class="s3"/><text x="278.3" y="72" class="ax">Always-cheapest (conversations)</text>
+<line x1="170.0" y1="82" x2="170.0" y2="506" class="grid"/><text x="170.0" y="520" text-anchor="middle" class="ax">0%</text>
+<line x1="292.5" y1="82" x2="292.5" y2="506" class="grid"/><text x="292.5" y="520" text-anchor="middle" class="ax">25%</text>
+<line x1="415.0" y1="82" x2="415.0" y2="506" class="grid"/><text x="415.0" y="520" text-anchor="middle" class="ax">50%</text>
+<line x1="537.5" y1="82" x2="537.5" y2="506" class="grid"/><text x="537.5" y="520" text-anchor="middle" class="ax">75%</text>
+<line x1="660.0" y1="82" x2="660.0" y2="506" class="grid"/><text x="660.0" y="520" text-anchor="middle" class="ax">100%</text>
+<text x="160" y="107" text-anchor="end" class="lab">Labels</text><text x="160" y="120" text-anchor="end" class="note">n = 20</text>
+<path class="s1" d="M170.0,90.0 H582.5 Q586.5,90.0 586.5,94.0 V97.0 Q586.5,101.0 582.5,101.0 H170.0 Z"/>
+<text x="591.5" y="99.5" class="note">85%</text>
+<path class="s2" d="M170.0,103.0 H533.5 Q537.5,103.0 537.5,107.0 V110.0 Q537.5,114.0 533.5,114.0 H170.0 Z"/>
+<text x="542.5" y="112.5" class="note">75%</text>
+<path class="s3" d="M170.0,116.0 H558.0 Q562.0,116.0 562.0,120.0 V123.0 Q562.0,127.0 558.0,127.0 H170.0 Z"/>
+<text x="567.0" y="125.5" class="note">80%</text>
+<text x="160" y="153" text-anchor="end" class="lab">JSON extraction</text><text x="160" y="166" text-anchor="end" class="note">n = 5</text>
+<path class="s1" d="M170.0,136.0 H656.0 Q660.0,136.0 660.0,140.0 V143.0 Q660.0,147.0 656.0,147.0 H170.0 Z"/>
+<text x="665.0" y="145.5" class="note">100%</text>
+<path class="s2" d="M170.0,149.0 H656.0 Q660.0,149.0 660.0,153.0 V156.0 Q660.0,160.0 656.0,160.0 H170.0 Z"/>
+<text x="665.0" y="158.5" class="note">100%</text>
+<path class="s3" d="M170.0,162.0 H460.0 Q464.0,162.0 464.0,166.0 V169.0 Q464.0,173.0 460.0,173.0 H170.0 Z"/>
+<text x="469.0" y="171.5" class="note">60%</text>
+<text x="160" y="199" text-anchor="end" class="lab">Drafted replies</text><text x="160" y="212" text-anchor="end" class="note">n = 5</text>
+<path class="s1" d="M170.0,182.0 H656.0 Q660.0,182.0 660.0,186.0 V189.0 Q660.0,193.0 656.0,193.0 H170.0 Z"/>
+<text x="665.0" y="191.5" class="note">100%</text>
+<path class="s2" d="M170.0,195.0 H656.0 Q660.0,195.0 660.0,199.0 V202.0 Q660.0,206.0 656.0,206.0 H170.0 Z"/>
+<text x="665.0" y="204.5" class="note">100%</text>
+<path class="s3" d="M170.0,208.0 H656.0 Q660.0,208.0 660.0,212.0 V215.0 Q660.0,219.0 656.0,219.0 H170.0 Z"/>
+<text x="665.0" y="217.5" class="note">100%</text>
+<text x="160" y="245" text-anchor="end" class="lab">Summaries</text><text x="160" y="258" text-anchor="end" class="note">n = 5</text>
+<path class="s1" d="M170.0,228.0 H656.0 Q660.0,228.0 660.0,232.0 V235.0 Q660.0,239.0 656.0,239.0 H170.0 Z"/>
+<text x="665.0" y="237.5" class="note">100%</text>
+<path class="s2" d="M170.0,241.0 H656.0 Q660.0,241.0 660.0,245.0 V248.0 Q660.0,252.0 656.0,252.0 H170.0 Z"/>
+<text x="665.0" y="250.5" class="note">100%</text>
+<path class="s3" d="M170.0,254.0 H656.0 Q660.0,254.0 660.0,258.0 V261.0 Q660.0,265.0 656.0,265.0 H170.0 Z"/>
+<text x="665.0" y="263.5" class="note">100%</text>
+<text x="160" y="291" text-anchor="end" class="lab">Translation</text><text x="160" y="304" text-anchor="end" class="note">n = 10</text>
+<path class="s1" d="M170.0,274.0 H656.0 Q660.0,274.0 660.0,278.0 V281.0 Q660.0,285.0 656.0,285.0 H170.0 Z"/>
+<text x="665.0" y="283.5" class="note">100%</text>
+<path class="s2" d="M170.0,287.0 H656.0 Q660.0,287.0 660.0,291.0 V294.0 Q660.0,298.0 656.0,298.0 H170.0 Z"/>
+<text x="665.0" y="296.5" class="note">100%</text>
+<path class="s3" d="M170.0,300.0 H656.0 Q660.0,300.0 660.0,304.0 V307.0 Q660.0,311.0 656.0,311.0 H170.0 Z"/>
+<text x="665.0" y="309.5" class="note">100%</text>
+<text x="160" y="337" text-anchor="end" class="lab">Calculations</text><text x="160" y="350" text-anchor="end" class="note">n = 10</text>
+<path class="s1" d="M170.0,320.0 H607.0 Q611.0,320.0 611.0,324.0 V327.0 Q611.0,331.0 607.0,331.0 H170.0 Z"/>
+<text x="616.0" y="329.5" class="note">90%</text>
+<path class="s2" d="M170.0,333.0 H509.0 Q513.0,333.0 513.0,337.0 V340.0 Q513.0,344.0 509.0,344.0 H170.0 Z"/>
+<text x="518.0" y="342.5" class="note">70%</text>
+<path class="s3" d="M170.0,346.0 H558.0 Q562.0,346.0 562.0,350.0 V353.0 Q562.0,357.0 558.0,357.0 H170.0 Z"/>
+<text x="567.0" y="355.5" class="note">80%</text>
+<text x="160" y="383" text-anchor="end" class="lab">Long-doc Q&amp;A, guards</text><text x="160" y="396" text-anchor="end" class="note">n = 10</text>
+<path class="s1" d="M170.0,366.0 H607.0 Q611.0,366.0 611.0,370.0 V373.0 Q611.0,377.0 607.0,377.0 H170.0 Z"/>
+<text x="616.0" y="375.5" class="note">90%</text>
+<path class="s2" d="M170.0,379.0 H656.0 Q660.0,379.0 660.0,383.0 V386.0 Q660.0,390.0 656.0,390.0 H170.0 Z"/>
+<text x="665.0" y="388.5" class="note">100%</text>
+<path class="s3" d="M170.0,392.0 H607.0 Q611.0,392.0 611.0,396.0 V399.0 Q611.0,403.0 607.0,403.0 H170.0 Z"/>
+<text x="616.0" y="401.5" class="note">90%</text>
+<text x="160" y="429" text-anchor="end" class="lab">Live voice</text><text x="160" y="442" text-anchor="end" class="note">n = 5</text>
+<path class="s1" d="M170.0,412.0 H460.0 Q464.0,412.0 464.0,416.0 V419.0 Q464.0,423.0 460.0,423.0 H170.0 Z"/>
+<text x="469.0" y="421.5" class="note">60%</text>
+
+<text x="175.0" y="434.5" class="note">0%</text>
+<path class="s3" d="M170.0,438.0 H460.0 Q464.0,438.0 464.0,442.0 V445.0 Q464.0,449.0 460.0,449.0 H170.0 Z"/>
+<text x="469.0" y="447.5" class="note">60%</text>
+<text x="160" y="475" text-anchor="end" class="lab">Compliance</text><text x="160" y="488" text-anchor="end" class="note">n = 5</text>
+<path class="s1" d="M170.0,458.0 H656.0 Q660.0,458.0 660.0,462.0 V465.0 Q660.0,469.0 656.0,469.0 H170.0 Z"/>
+<text x="665.0" y="467.5" class="note">100%</text>
+<path class="s2" d="M170.0,471.0 H558.0 Q562.0,471.0 562.0,475.0 V478.0 Q562.0,482.0 558.0,482.0 H170.0 Z"/>
+<text x="567.0" y="480.5" class="note">80%</text>
+<path class="s3" d="M170.0,484.0 H558.0 Q562.0,484.0 562.0,488.0 V491.0 Q562.0,495.0 558.0,495.0 H170.0 Z"/>
+<text x="567.0" y="493.5" class="note">80%</text>
+<line x1="170" y1="82" x2="170" y2="506" class="base"/>
+</svg>
